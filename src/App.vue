@@ -5,7 +5,7 @@
       <router-link to="/TelaCadastro">Tela de Cadastro</router-link> |
       <router-link to="/TelaPesquisa">Tela de Pesquisa</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 

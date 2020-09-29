@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TelaCadastro from '../views/TelaCadastro.vue'
 import TelaPesquisa from '../views/TelaPesquisa.vue'
+import TelaEditar from '../views/TelaEditar.vue'
+
 
 Vue.use(VueRouter)
 
@@ -21,8 +23,12 @@ const routes = [
     path: '/telapesquisa',
     name: 'TelaPesquisa',
     component: TelaPesquisa
+  },
+  {
+    path: '/telaeditar/:id',
+    name: 'TelaEditar',
+    component: TelaEditar
   }
-  
 ]
 
 const router = new VueRouter({

@@ -1,20 +1,75 @@
 <template>
-<div>
-<div>
- <div class="figura">
-        <img alt="Vue logo" src="../src/assets/vue-dog.jpg">
- </div>
-        <h2>Pesquisa de Pet!</h2>
-        <h4>Encontre um pet pesquisando pelo nome</h4>
- <form>
-    <div class="form-group">
+  <div>
+    <img alt="Vue logo" src="../assets/vue-dog.jpg" />
+    <h2>Pesquisa de Pet!</h2>
+    <h4>Encontre seu pet abaixo!</h4>
+    <!--  -->
+    <form>
+      <div class="form-group">
         <label for="PesquisaPorNome">Nome do pet</label>
-            <input type="text" class="form-control" id="PesquisaPorNome" 
-            placeholder="Faça uma pesquisa por nome do pet!">
-            <button type="pesquisar" class="btn btn-primary">Pesquisar</button>
+        <input
+          type="text"
+          class="form-control"
+          id="PesquisaPorNome"
+          placeholder="Faça uma pesquisa por nome do pet!"
+        />
+        <button type="pesquisar" class="gitbtn btn-primary">Pesquisar</button>
+      </div>
+    </form>
+    
+    <div class="div">
+      {{ listaCachorros }}
     </div>
- </form>
- </div>
- </div>
+    
+    <div class="user" :key="cachorro.id" v-for="cachorro in listaCachorros">
+      <div class="row">
+        <div class="col-2">{{ cachorro.nome }}</div>
+        <div class="col-2">{{ cachorro.idade }}</div>
+        <div class="col-2">{{ cachorro.peso }}</div>
+        <div class="col-2">{{ cachorro.raca }}</div>
+        <div class="col-4">
+          <a href="#" @click="editarCachorro(cachorro.id)">Editar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      listaCachorros: [],
+    };
+  },
+
+  mounted() {
+
+    fetch("http://localhost:8080/cachorros", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((cachorroJSON) => {
+        this.listaCachorro = cachorroJSON;
+      });
+  },
+  methods: {
+    editarCachorro(id) {
+      this.$router.push(`/telaeditar/${id}`);
+    },
+  },
+};
+</script>
+
+<style>
+.user {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+</style>
