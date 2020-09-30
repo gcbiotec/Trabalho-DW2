@@ -6,25 +6,31 @@
     <h4>Altere os dados do seu pet!</h4>
 
     <div class="row">
-      <div class="col-3">
-        <label>id</label>
+        <label>Identificação</label>
         <input type="text" class="form-control" readonly v-model="cachorro.id" />
-      </div>
-      <div class="col-3">
+    </div>
+
+    <div class="row"> 
         <label>Nome</label>
         <input type="text" class="form-control" v-model="cachorro.nome" />
       </div>
-      <div class="col-3">
-        <label>idade</label>
+      
+    <div class="row">
+        <label>Idade</label>
         <input type="text" class="form-control" v-model="cachorro.idade" />
       </div>
-      <div class="col-3">
+
+    <div class="row">
         <label>Peso</label>
         <input type="text" class="form-control" v-model="cachorro.peso" />
       </div>
-    </div>
 
-    <!--
+    <div class="row">      
+        <label>Raça</label>
+        <input type="text" class="form-control" v-model="cachorro.raca" />
+      
+    </div>
+   <!--
     <div class="row">
       <div class="col-4">
         <select class="dropdown">
@@ -62,10 +68,10 @@
       </div>
     </div> 
     -->
-
     <div class="row">
-      <div class="button" @click="salvar()">Salvar</div>
-    </div>
+      <div type="button" class="btn btn-primary" @click="salvar()">Salvar Mudanças</div>
+    </div>  
+    
   </div>
 </template>
 
@@ -104,7 +110,8 @@ export default {
         body: JSON.stringify(this.cachorro),
       }).then((response) => {
         if (response.ok) {
-          alert("Dados foram alterados com sucesso!"), this.$router.push("/home");
+          alert("Dados foram alterados com sucesso!"),
+            this.$router.push("/");
         }
       });
     },

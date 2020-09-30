@@ -9,7 +9,7 @@
       <div id="campoNome" class="container">
         <label>Nome</label>
         <input
-        id="validationDefault01"
+          id="validationDefault01"
           v-model="cachorro.nome"
           type="text"
           class="form-control"
@@ -20,57 +20,48 @@
 
     <div class="container">
       <div class="row">
-        <label>Escolha a raça do seu dog!</label>
-        <!--<div class="col-6">
-          <select input v-model="cachorro.tipo" class="dropdown">
-            <option selected>Escolha o tipo do seu pet!</option>
-            <option value="1">Cachorro</option>
-            <option value="2">Gato</option>
-          </select>
-        </div> -->
         <div class="col-6">
+          <label>Escolha a raça do seu dog!</label>
+        </div>
+        <div class="col-6">  
           <select input v-model="cachorro.raca" class="dropdown">
-            <option value="1">Beagle</option>
-            <option value="2">Rottweiler</option>
-            <option value="3">Poodle</option>
+            <option value="Beagle">Beagle</option>
+            <option value="Rottweiler">Rottweiler</option>
+            <option value="Poodle">Poodle</option>
           </select>
         </div>
+       </div> 
       </div>
-    </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <form>
-            <label for="formControlPeso">Escolha o peso do pet:</label>
-            <input
+      <div class="col-4">
+        <form>
+          <label for="formControlPeso">Escolha o peso do pet:</label>
+          <input
             id="validationDefault02"
-              v-model="cachorro.peso"
-              type="number"
-              value="1"
-              min="1"
-              max="100"
-              step="1"
-            />
-          </form>
-        </div>
-
-        <div class="col-6">
-          <form>
-            <label for="formControlIdade">Escolha a idade do pet:</label>
-            <input
-            id="validationDefault03"
-              v-model="cachorro.idade"
-              type="number"
-              value="1"
-              min="1"
-              max="30"
-              step="1"
-            />
-          </form>
-        </div>
+            v-model="cachorro.peso"
+            type="number"
+            value="1"
+            min="1"
+            max="100"
+            step="1"
+          />
+        </form>
       </div>
-    </div>
+
+      <div class="col-4">
+        <form>
+          <label for="formControlIdade">Escolha a idade do pet:</label>
+          <input
+            id="validationDefault03"
+            v-model="cachorro.idade"
+            type="number"
+            value="1"
+            min="1"
+            max="30"
+            step="1"
+          />
+        </form>
+      </div>
 
     <button type="button" class="btn btn-primary" @click="salvar()">
       Salvar
@@ -96,7 +87,7 @@ export default {
         body: JSON.stringify(this.cachorro),
       }).then((response) => {
         if (response.ok) {
-          alert("Dados foram salvos!"), this.$router.push("/home");
+          alert("Dados foram cadastrados!"), this.$router.push("/");
         }
       });
     },
