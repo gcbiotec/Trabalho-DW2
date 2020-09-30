@@ -8,19 +8,21 @@
       <div class="form-group">
         <label for="PesquisaPorNome">Nome do pet</label>
         <input
+          v-model="cachorro.nome"
           type="text"
           class="form-control"
           id="PesquisaPorNome"
           placeholder="Faça uma pesquisa por nome do pet!"
         />
-        <button type="pesquisar" class="gitbtn btn-primary">Pesquisar</button>
+        <button type="pesquisar" class="btn btn-primary" @click="pesquisar(cachorro.nome)">
+          Pesquisar</button>
       </div>
     </form>
-    
+
     <div class="div">
       {{ listaCachorros }}
     </div>
-    
+
     <div class="user" :key="cachorro.id" v-for="cachorro in listaCachorros">
       <div class="row">
         <div class="col-2">{{ cachorro.nome }}</div>
@@ -39,29 +41,29 @@
 export default {
   data() {
     return {
+      cachorro: {},
       listaCachorros: [],
     };
   },
 
-  mounted() {
-
-    fetch("http://localhost:8080/cachorros", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-      })
-      .then((cachorroJSON) => {
-        this.listaCachorro = cachorroJSON;
-      });
-  },
   methods: {
     editarCachorro(id) {
       this.$router.push(`/telaeditar/${id}`);
+    },
+    pesquisar(nome) {
+      fetch(`http://localhost:8080/cachorros/${nome}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((cachorroJSON) => {
+          this.listaCachorros = cachorroJSON;
+        });
     },
   },
 };
