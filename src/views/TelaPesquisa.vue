@@ -5,8 +5,8 @@
     <h4>Encontre seu pet abaixo!</h4>
     <!--  -->
     <form>
-      <div class="form-group">
-        <label for="PesquisaPorNome">Nome do pet</label>
+      <div id="campoNome" class="form-group">
+        
         <input
           v-model="cachorro.nome"
           type="text"
@@ -14,7 +14,7 @@
           id="PesquisaPorNome"
           placeholder="Faça uma pesquisa por nome do pet!"
         />
-        <button type="pesquisar" class="btn btn-primary" @click="pesquisar()">
+        <button id="pesquisar" class="btn btn-primary" @click="pesquisar()">
           Pesquisar
         </button>
       </div>
@@ -87,5 +87,11 @@ export default {
 .user {
   border-bottom: 1px solid #ccc;
   padding: 10px;
+}
+.PesquisaPorNome {
+  width: 5pt;
+}
+.pesquisar {
+  padding-top: 20pt;
 }
 </style>

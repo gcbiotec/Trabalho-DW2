@@ -7,7 +7,6 @@
 
     <form>
       <div id="campoNome" class="container">
-        <label>Nome</label>
         <input
           id="validationDefault01"
           v-model="cachorro.nome"
@@ -20,52 +19,59 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-6">
+        <div id="escolhaRaca" class="col-4">
           <label>Escolha a raça do seu dog!</label>
+        
+        <select input v-model="cachorro.raca" class="dropdown">
+          <option value="Beagle">Beagle</option>
+          <option value="Rottweiler">Rottweiler</option>
+          <option value="Poodle">Poodle</option>
+        </select>
+      </div>
+
+        <div class="col-4">
+          <form>
+            <label id="escolhaPeso" for="formControlPeso">Escolha o peso:</label>
+            <input
+              id="validationDefault02"
+              v-model="cachorro.peso"
+              type="number"
+              value="1"
+              min="1"
+              max="100"
+              step="1"
+            />
+          </form>
         </div>
-        <div class="col-6">  
-          <select input v-model="cachorro.raca" class="dropdown">
-            <option value="Beagle">Beagle</option>
-            <option value="Rottweiler">Rottweiler</option>
-            <option value="Poodle">Poodle</option>
-          </select>
+
+        <div class="col-4">
+          <form>
+            <label id="escolhaIdade" for="formControlIdade">Escolha a idade:</label>
+            <input
+              id="validationDefault03"
+              v-model="cachorro.idade"
+              type="number"
+              value="1"
+              min="1"
+              max="30"
+              step="1"
+            />
+          </form>
         </div>
-       </div> 
       </div>
-
-      <div class="col-4">
-        <form>
-          <label for="formControlPeso">Escolha o peso do pet:</label>
-          <input
-            id="validationDefault02"
-            v-model="cachorro.peso"
-            type="number"
-            value="1"
-            min="1"
-            max="100"
-            step="1"
-          />
-        </form>
+    </div>
+  
+    <div id="botao" class="container">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+        <button type="button" class="btn btn-primary" @click="salvar()">
+          Salvar
+        </button>
+        <div class="col-4"></div>
+        </div>
       </div>
-
-      <div class="col-4">
-        <form>
-          <label for="formControlIdade">Escolha a idade do pet:</label>
-          <input
-            id="validationDefault03"
-            v-model="cachorro.idade"
-            type="number"
-            value="1"
-            min="1"
-            max="30"
-            step="1"
-          />
-        </form>
-      </div>
-
-    <button type="button" class="btn btn-primary" @click="salvar()">
-      Salvar
-    </button>
+    </div>
   </div>
 </template>
 
@@ -87,7 +93,7 @@ export default {
         body: JSON.stringify(this.cachorro),
       }).then((response) => {
         if (response.ok) {
-          alert("Dados foram cadastrados!"), this.$router.push("/");
+          alert("Seu dog foi cadastrado!"), this.$router.push("/");
         }
       });
     },
@@ -96,20 +102,25 @@ export default {
 </script>
 
 <style scoped>
-.col {
+#campoNome {
+  width: 40%;
+  padding: 20pt;
+}
+#botao{
+  align-content: bottom;
+  padding-top: 40pt;
+}
+#escolhaRaca{
   display: flex;
-  justify-content: flex-start;
-  width: 70%;
+  flex-direction: column;
+}
+#escolhaPeso{
+display: flex;
+flex-direction: column;
+}
+#escolhaIdade{
+display: flex;
+flex-direction: column;
 }
 
-.row {
-  display: flex;
-  justify-content: flex-start;
-  padding: 20px;
-  margin: 40px;
-}
-
-.campoNome {
-  width: 70%;
-}
 </style>
