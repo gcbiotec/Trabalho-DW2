@@ -7,7 +7,7 @@
   
   <div class="container">
     <div class="row">
-      <div id="PesquisaPorNome" class="form-group">
+      <div class = "PesquisaPorNome" >
         
         <input
           v-model="cachorro.nome"
@@ -17,7 +17,7 @@
         />
       </div>
      </div> 
-      <div class="row"> 
+      <div class="row-flex"> 
         <button id="pesquisar" class="btn btn-primary" @click="pesquisar(cachorro.nome)">
           Pesquisar
         </button>
@@ -27,10 +27,18 @@
   
     <div class="user" :key="cachorro.id" v-for="cachorro in listaCachorros">
       <div class="row">
-        <div class="col-2">{{ cachorro.nome }}</div>
-        <div class="col-2">{{ cachorro.idade }}</div>
-        <div class="col-2">{{ cachorro.peso }}</div>
-        <div class="col-2">{{ cachorro.raca }}</div>
+        <div class="col-2">
+          <label>Nome:</label>
+          {{ cachorro.nome }}</div>
+        <div class="col-2">
+          <label>Idade:</label>
+          {{ cachorro.idade }}</div>
+        <div class="col-2">
+          <label>Peso:</label>
+          {{ cachorro.peso }}</div>
+        <div class="col-2">
+          <label>Raça:</label>
+          {{ cachorro.raca }}</div>
         <div class="col-4">
           <a href="#" @click="editarCachorro(cachorro.id)">Editar</a>
         </div>
@@ -93,13 +101,10 @@ export default {
   border-bottom: 1px solid #ccc;
   padding: 10px;
 }
+.row-flex{
+  padding: 40px;
+}
 .PesquisaPorNome {
-  width: 5pt;
-}
-.pesquisar {
-  border: 200px;
-}
-.row{
   width: 80%;
 }
 </style>

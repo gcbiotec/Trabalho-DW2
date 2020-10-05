@@ -26,6 +26,13 @@
           <option value="Beagle">Beagle</option>
           <option value="Rottweiler">Rottweiler</option>
           <option value="Poodle">Poodle</option>
+          <option value="Pastor Alemão">Pastor Alemão</option>
+          <option value="Bulldog">Bulldog</option>
+          <option value="Labrador">Labrador</option>
+          <option value="Husky">Husky</option>
+          <option value="Chihuahua">Chihuahua</option>
+          <option value="Dobermann">Dobermann</option>
+          <option value="Bull Terrier">Bull Terrier</option>
         </select>
       </div>
 
