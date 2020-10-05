@@ -5,7 +5,7 @@
     <h2>Cadastro do Pet</h2>
     <h4>Cadastre os dados do seu pet!</h4>
 
-    <form>
+    <form class="needs-validation" novalidate>
       <div id="campoNome" class="container">
         <input
           id="validationDefault01"
@@ -68,11 +68,16 @@
         <button type="button" class="btn btn-primary" @click="salvar()">
           Salvar
         </button>
+        <div>
+      <span v-if="mensagemErro != ' ' ">{{mensagemErro}}</span>
+    </div>
         <div class="col-4"></div>
         </div>
       </div>
     </div>
+    
   </div>
+
 </template>
 
 <script>
@@ -80,10 +85,22 @@ export default {
   data() {
     return {
       cachorro: {},
+      mensagemErro: "",
     };
   },
   methods: {
+    dadosValidos(){
+      if(this.cachorro.nome == undefined || this.cachorro.nome == ""){
+        return false;
+      }
+      return true;
+    },
     salvar() {
+      if(!this.dadosValidos()){
+        this.mensagemErro = "Você deve preencher o nome do seu cachorro!";
+        return;
+      }
+
       fetch("http://localhost:8080/cachorros", {
         method: "POST",
         headers: {
@@ -103,7 +120,7 @@ export default {
 
 <style scoped>
 #campoNome {
-  width: 40%;
+  width: 80%;
   padding: 20pt;
 }
 #botao{

@@ -4,22 +4,27 @@
     <h2>Pesquisa de Pet!</h2>
     <h4>Encontre seu pet abaixo!</h4>
     <!--  -->
-    <form>
-      <div id="campoNome" class="form-group">
+  
+  <div class="container">
+    <div class="row">
+      <div id="PesquisaPorNome" class="form-group">
         
         <input
           v-model="cachorro.nome"
           type="text"
           class="form-control"
-          id="PesquisaPorNome"
           placeholder="Faça uma pesquisa por nome do pet!"
         />
-        <button id="pesquisar" class="btn btn-primary" @click="pesquisar()">
+      </div>
+     </div> 
+      <div class="row"> 
+        <button id="pesquisar" class="btn btn-primary" @click="pesquisar(cachorro.nome)">
           Pesquisar
         </button>
       </div>
-    </form>
-
+   </div> 
+     
+  
     <div class="user" :key="cachorro.id" v-for="cachorro in listaCachorros">
       <div class="row">
         <div class="col-2">{{ cachorro.nome }}</div>
@@ -64,8 +69,8 @@ export default {
       this.$router.push(`/telaeditar/${id}`);
     },
 
-    pesquisar() {
-      fetch("http://localhost:8080/cachorros", {
+    pesquisar(nome) {
+      fetch(`http://localhost:8080/cachorros?nome=${nome}`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -92,6 +97,9 @@ export default {
   width: 5pt;
 }
 .pesquisar {
-  padding-top: 20pt;
+  border: 200px;
+}
+.row{
+  width: 80%;
 }
 </style>

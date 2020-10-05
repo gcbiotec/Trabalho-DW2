@@ -14,7 +14,7 @@
         <label>Nome</label>
         <input type="text" class="form-control" v-model="cachorro.nome" />
       </div>
-      
+  <!--    
     <div class="row">
         <label>Idade</label>
         <input type="text" class="form-control" v-model="cachorro.idade" />
@@ -24,22 +24,15 @@
         <label>Peso</label>
         <input type="text" class="form-control" v-model="cachorro.peso" />
       </div>
-
+  -->
     <div class="row">      
         <label>Raça</label>
         <input type="text" class="form-control" v-model="cachorro.raca" />
       
     </div>
-   <!--
+   
     <div class="row">
-      <div class="col-4">
-        <select class="dropdown">
-          <option selected>Escolha a raça do seu pet!</option>
-          <option value="1">Beagle</option>
-          <option value="2">Rottweiler</option>
-          <option value="3">Poodle</option>
-        </select>
-      </div>
+      
       <div class="col-4">
         <form>
           <label for="formControlPeso">Escolha o peso do pet:</label>
@@ -67,7 +60,7 @@
         </form>
       </div>
     </div> 
-    -->
+    
     <div class="row">
       <div type="button" class="btn btn-primary" @click="salvar()">Salvar Mudanças</div>
     </div>  
