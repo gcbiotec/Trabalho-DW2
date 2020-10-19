@@ -2,8 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/TelaCadastro">Tela de Cadastro</router-link> |
-      <router-link to="/TelaPesquisa">Tela de Pesquisa</router-link>
+      <router-link to="/TelaCadastro">Tela de Cadastro Dog</router-link> |
+      <router-link to="/TelaPesquisa">Tela de Pesquisa Dog</router-link> |
+      <router-link to="/TelaCadastroVet">Tela de Cadastro Veterinário</router-link> |
+      <router-link to="/TelaPesquisaVet">Tela de Pesquisa Veterinário</router-link> 
     </div>
     <router-view />
   </div>

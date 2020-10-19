@@ -3,6 +3,11 @@
     <div class="card">
       <div class="card-body"><card-boas-vindas /></div>
     </div>
+    <div class="row" id="Entidade">
+      <div class="col-4"></div>
+      <div class="col-4"><b>Cachorros</b></div>
+      <div class="col-4"></div>
+    </div>
     <div class="row">
       <div class="col-3"></div>
 
@@ -19,6 +24,37 @@
       <div class="col-3" id="Cadastro">
         <button
           @click="IrParaCadastro"
+          type="button"
+          class="btn btn-outline-success"
+        >
+          <card-cadastro />
+        </button>
+      </div>
+
+      <div class="col-3"></div>
+    </div>
+
+    <div id="entidade" class="row">
+      <div class="col-4"></div>
+      <div class="col-4"><b>Veterinários</b></div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-3"></div>
+
+      <div class="col-3" id="Pesquisa">
+        <button
+          @click="IrParaPesquisaVet"
+          type="button"
+          class="btn btn-outline-primary"
+        >
+          <card-pesquisa />
+        </button>
+      </div>
+
+      <div class="col-3" id="Cadastro">
+        <button
+          @click="IrParaCadastroVet"
           type="button"
           class="btn btn-outline-success"
         >
@@ -51,6 +87,12 @@ export default {
     IrParaCadastro() {
       this.$router.push({ path: "/TelaCadastro" });
     },
+    IrParaPesquisaVet() {
+      this.$router.push({ path: "/TelaPesquisaVet" });
+    },
+    IrParaCadastroVet() {
+      this.$router.push({ path: "/TelaCadastroVet" });
+    },
   },
 };
 </script>
@@ -62,5 +104,8 @@ export default {
 .Cadastro {
   align-content: right;
   width: 250px;
+}
+.Entidade {
+  padding: 200px;
 }
 </style>

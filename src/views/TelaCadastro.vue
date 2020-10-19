@@ -21,24 +21,26 @@
       <div class="row">
         <div id="escolhaRaca" class="col-4">
           <label>Escolha a raça do seu dog!</label>
-        
-        <select input v-model="cachorro.raca" class="dropdown">
-          <option value="Beagle">Beagle</option>
-          <option value="Rottweiler">Rottweiler</option>
-          <option value="Poodle">Poodle</option>
-          <option value="Pastor Alemão">Pastor Alemão</option>
-          <option value="Bulldog">Bulldog</option>
-          <option value="Labrador">Labrador</option>
-          <option value="Husky">Husky</option>
-          <option value="Chihuahua">Chihuahua</option>
-          <option value="Dobermann">Dobermann</option>
-          <option value="Bull Terrier">Bull Terrier</option>
-        </select>
-      </div>
+
+          <select input v-model="cachorro.raca" class="dropdown">
+            <option value="Beagle">Beagle</option>
+            <option value="Rottweiler">Rottweiler</option>
+            <option value="Poodle">Poodle</option>
+            <option value="Pastor Alemão">Pastor Alemão</option>
+            <option value="Bulldog">Bulldog</option>
+            <option value="Labrador">Labrador</option>
+            <option value="Husky">Husky</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="Dobermann">Dobermann</option>
+            <option value="Bull Terrier">Bull Terrier</option>
+          </select>
+        </div>
 
         <div class="col-4">
           <form>
-            <label id="escolhaPeso" for="formControlPeso">Escolha o peso:</label>
+            <label id="escolhaPeso" for="formControlPeso"
+              >Escolha o peso:</label
+            >
             <input
               id="validationDefault02"
               v-model="cachorro.peso"
@@ -53,7 +55,9 @@
 
         <div class="col-4">
           <form>
-            <label id="escolhaIdade" for="formControlIdade">Escolha a idade:</label>
+            <label id="escolhaIdade" for="formControlIdade"
+              >Escolha a idade:</label
+            >
             <input
               id="validationDefault03"
               v-model="cachorro.idade"
@@ -67,24 +71,22 @@
         </div>
       </div>
     </div>
-  
+
     <div id="botao" class="container">
       <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
-        <button type="button" class="btn btn-primary" @click="salvar()">
-          Salvar
-        </button>
-        <div>
-      <span v-if="mensagemErro != ' ' ">{{mensagemErro}}</span>
-    </div>
-        <div class="col-4"></div>
+          <button type="button" class="btn btn-primary" @click="salvar()">
+            Salvar
+          </button>
+          <div>
+            <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
+          </div>
+          <div class="col-4"></div>
         </div>
       </div>
     </div>
-    
   </div>
-
 </template>
 
 <script>
@@ -96,14 +98,14 @@ export default {
     };
   },
   methods: {
-    dadosValidos(){
-      if(this.cachorro.nome == undefined || this.cachorro.nome == ""){
+    dadosValidos() {
+      if (this.cachorro.nome == undefined || this.cachorro.nome == "") {
         return false;
       }
       return true;
     },
     salvar() {
-      if(!this.dadosValidos()){
+      if (!this.dadosValidos()) {
         this.mensagemErro = "Você deve preencher o nome do seu cachorro!";
         return;
       }
@@ -130,21 +132,20 @@ export default {
   width: 80%;
   padding: 20pt;
 }
-#botao{
+#botao {
   align-content: bottom;
   padding-top: 40pt;
 }
-#escolhaRaca{
+#escolhaRaca {
   display: flex;
   flex-direction: column;
 }
-#escolhaPeso{
-display: flex;
-flex-direction: column;
+#escolhaPeso {
+  display: flex;
+  flex-direction: column;
 }
-#escolhaIdade{
-display: flex;
-flex-direction: column;
+#escolhaIdade {
+  display: flex;
+  flex-direction: column;
 }
-
 </style>
