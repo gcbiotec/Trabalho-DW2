@@ -1,13 +1,17 @@
 <template>
      <div id="figuraCadastro">
-     <h3>Novo Cadastro</h3>
-     <h5>Clique aqui para cadastrar seu pet!</h5>   
+     <h3>{{titulo}}</h3>
+     <h5>{{subtitulo}}</h5>   
     </div>
 </template>
 
 <script>
 export default {
-    
+    name: 'CardCadastro',
+    props: {
+    titulo: String,
+    subtitulo: String,
+  }
 }
 </script>
 

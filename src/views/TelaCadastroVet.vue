@@ -2,7 +2,9 @@
   <div>
     <div class="card">
       <div class="card-body">
-        <card-boas-vindas msg="Aqui você pode cadastrar um novo veterinário" />
+        <card-boas-vindas
+          titulo="Aqui você pode cadastrar um novo veterinário"
+        />
       </div>
     </div>
     <div class="container">
@@ -15,34 +17,42 @@
       />
     </div>
     <div class="container">
-      <input
-        class="form-control"
-        type="number"
-        maxlength="11"
-        v-model="veterinario.cpf"
-        placeholder="Qual é o CPF do veterinário?"
-      />
-    </div>
-    <div class="container">
-      <input
-        class="form-control"
-        type="text"
-        maxlength="100"
-        v-model="veterinario.dataNasc"
-        placeholder="Qual é a data de nascimento do veterinário?"
-      />
-    </div>
-    <div id="botao" class="container">
       <div class="row">
-        <div class="col-4"></div>
         <div class="col-4">
-          <button type="button" class="btn btn-primary" @click="salvar()">
-            Salvar
-          </button>
-          <div>
-            <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
+          <div id="campoCPF" class="container">
+            <row
+              >Qual o seu CPF?
+              <the-mask
+                :mask="['###.###.###-##', '##.###.###/####-##']"
+                v-model="veterinario.cpf"
+              />
+            </row>
           </div>
+        </div>
+
+        <div class="col-4"></div>
+
+        <div class="col-4">
+          <span class="demonstration">Data de Nascimento</span>
+          <el-date-picker v-model="value1" type="date" placeholder="Pick a day">
+          </el-date-picker>
+        </div>
+      </div>
+
+      <div class="row"></div>
+
+      <div id="botao" class="container">
+        <div class="row">
           <div class="col-4"></div>
+          <div class="col-4">
+            <button type="button" class="btn btn-primary" @click="salvar()">
+              Salvar
+            </button>
+            <div>
+              <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
+            </div>
+            <div class="col-4"></div>
+          </div>
         </div>
       </div>
     </div>

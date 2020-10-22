@@ -1,11 +1,16 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-body"><card-boas-vindas /></div>
+      <div class="card-body">
+        <card-boas-vindas
+          titulo="Bem vindo ao Vue Pet Clinic"
+          subtitulo="A maneira mais fácil e reativa de cadastrar seus pets!"
+        />
+      </div>
     </div>
     <div class="row" id="Entidade">
       <div class="col-4"></div>
-      <div class="col-4"><b>Cachorros</b></div>
+      <div id="Categoria" class="col-4"><b>Cachorros</b></div>
       <div class="col-4"></div>
     </div>
     <div class="row">
@@ -17,7 +22,10 @@
           type="button"
           class="btn btn-outline-primary"
         >
-          <card-pesquisa />
+          <card-pesquisa
+            titulo="Pesquisa de Cachorros"
+            subtitulo="Clique aqui para pesquisar um cachorro já cadastrado"
+          />
         </button>
       </div>
 
@@ -27,7 +35,10 @@
           type="button"
           class="btn btn-outline-success"
         >
-          <card-cadastro />
+          <card-cadastro
+            titulo="Cadastro de Cachorros"
+            subtitulo="Clique aqui para cadastrar um cachorro!"
+          />
         </button>
       </div>
 
@@ -36,7 +47,7 @@
 
     <div id="entidade" class="row">
       <div class="col-4"></div>
-      <div class="col-4"><b>Veterinários</b></div>
+      <div id="Categoria" class="col-4"><b>Veterinários</b></div>
       <div class="col-4"></div>
     </div>
     <div class="row">
@@ -48,7 +59,10 @@
           type="button"
           class="btn btn-outline-primary"
         >
-          <card-pesquisa />
+          <card-pesquisa
+            titulo="Pesquisa de Veterinários"
+            subtitulo="Clique aqui para pesquisar um veterinário já cadastrado"
+          />
         </button>
       </div>
 
@@ -58,7 +72,10 @@
           type="button"
           class="btn btn-outline-success"
         >
-          <card-cadastro />
+          <card-cadastro
+            titulo="Cadastro de Veterinários"
+            subtitulo="Clique aqui para cadastrar um veterinário!"
+          />
         </button>
       </div>
 
@@ -107,5 +124,9 @@ export default {
 }
 .Entidade {
   padding: 200px;
+}
+#Categoria {
+  font-size: 50px;
+  color: green;
 }
 </style>
