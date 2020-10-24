@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <card-boas-vindas
-          titulo="Aqui você pode cadastrar um novo veterinário"
+          titulo="Aqui você pode cadastrar um novo veterinário!"
         />
       </div>
     </div>
@@ -34,12 +34,15 @@
 
         <div class="col-4">
           <span class="demonstration">Data de Nascimento</span>
-          <el-date-picker v-model="value1" type="date" placeholder="Pick a day">
+          <el-date-picker v-model="veterinario.dataNasc" type="date" placeholder="Escolha a data">
           </el-date-picker>
         </div>
       </div>
 
-      <div class="row"></div>
+      <div class="row">
+        <el-radio v-model="radio" label="1">Masculino</el-radio>
+        <el-radio v-model="radio" label="2">Feminino</el-radio>
+      </div>
 
       <div id="botao" class="container">
         <div class="row">
@@ -105,6 +108,7 @@ export default {
     return {
       veterinario: {},
       listaVeterinarios: [],
+      radio: " ",
     };
   },
 };

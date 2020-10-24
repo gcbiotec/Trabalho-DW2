@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-body"><card-boas-vindas titulo="Aqui você pode pesquisar um veterinário" /></div>
+      <div class="card-body"><card-boas-vindas titulo="Aqui você pode pesquisar um veterinário!" /></div>
     </div>
 
     <div class="container">
