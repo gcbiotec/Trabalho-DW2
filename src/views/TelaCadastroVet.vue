@@ -20,28 +20,27 @@
       <div class="row">
         <div class="col-4">
           <div id="campoCPF" class="container">
-            <row
-              >Qual o seu CPF?
+            Qual o seu CPF?
               <the-mask
                 :mask="['###.###.###-##', '##.###.###/####-##']"
                 v-model="veterinario.cpf"
               />
-            </row>
-          </div>
+            </div>
         </div>
 
-        <div class="col-4"></div>
+        <div class="col-4">
+          {{ this.dataAtual }}
+        </div>
 
         <div class="col-4">
           <span class="demonstration">Data de Nascimento</span>
-          <el-date-picker v-model="veterinario.dataNasc" type="date" placeholder="Escolha a data">
+          <el-date-picker
+            v-model="veterinario.dataNasc"
+            type="date"
+            placeholder="Escolha a data"
+          >
           </el-date-picker>
         </div>
-      </div>
-
-      <div class="row">
-        <el-radio v-model="radio" label="1">Masculino</el-radio>
-        <el-radio v-model="radio" label="2">Feminino</el-radio>
       </div>
 
       <div id="botao" class="container">
@@ -52,7 +51,7 @@
               Salvar
             </button>
             <div>
-              <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
+              <!-- <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span> -->
             </div>
             <div class="col-4"></div>
           </div>
@@ -90,8 +89,17 @@ export default {
         return;
       }
 
-      fetch("http://localhost:8080/veterinarios", {
-        method: "POST",
+      let parametroId = " ";
+      let metodoHTTP;
+      if (this.$route.params.id != undefined) {
+        metodoHTTP = "PUT";
+        parametroId = this.$route.params.id;
+      } else {
+        metodoHTTP = "POST";
+      }
+
+      fetch("http://localhost:8080/veterinarios/" + parametroId, {
+        method: metodoHTTP,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -108,8 +116,14 @@ export default {
     return {
       veterinario: {},
       listaVeterinarios: [],
-      radio: " ",
+      dataAtual: new Date(),
     };
   },
 };
 </script>
+
+<style>
+.container {
+  padding: 10px;
+}
+</style>

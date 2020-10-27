@@ -14,17 +14,7 @@
         <label>Nome</label>
         <input type="text" class="form-control" v-model="cachorro.nome" />
       </div>
-  <!--    
-    <div class="row">
-        <label>Idade</label>
-        <input type="text" class="form-control" v-model="cachorro.idade" />
-      </div>
-
-    <div class="row">
-        <label>Peso</label>
-        <input type="text" class="form-control" v-model="cachorro.peso" />
-      </div>
-  -->
+  
     <div class="row">      
         <label>Raça</label>
         <input type="text" class="form-control" v-model="cachorro.raca" />

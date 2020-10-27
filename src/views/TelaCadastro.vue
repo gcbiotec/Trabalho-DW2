@@ -19,7 +19,7 @@
 
     <div class="container">
       <div class="row">
-        <div id="escolhaRaca" class="col-4">
+        <div id="escolhaRaca" class="col-3">
           <label>Escolha a raça do seu dog!</label>
 
           <select input v-model="cachorro.raca" class="dropdown">
@@ -36,7 +36,7 @@
           </select>
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
           <form>
             <label id="escolhaPeso" for="formControlPeso"
               >Escolha o peso:</label
@@ -53,7 +53,7 @@
           </form>
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
           <form>
             <label id="escolhaIdade" for="formControlIdade"
               >Escolha a idade:</label
@@ -68,6 +68,19 @@
               step="1"
             />
           </form>
+        </div>
+        
+        <div id="campoVet" class="col-3">
+          <label>Escolha o veterinário responsável:</label>
+          <select v-model="cachorro.veterinarioResponsavel">
+            <option
+              :key="veterinarioResponsavel.id"
+              v-for="veterinarioResponsavel in listaVeterinarios"
+              :value="veterinarioResponsavel.id"
+            >
+              {{ veterinarioResponsavel.nome }}
+            </option>
+          </select>
         </div>
       </div>
     </div>
@@ -95,7 +108,23 @@ export default {
     return {
       cachorro: {},
       mensagemErro: "",
+      listaVeterinarios: [],
     };
+  },
+  mounted() {
+    fetch(`http://localhost:8080/veterinarios`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((veterinarioJSON) => {
+        this.listaVeterinarios = veterinarioJSON;
+      });
   },
   methods: {
     dadosValidos() {
@@ -131,6 +160,10 @@ export default {
 #campoNome {
   width: 80%;
   padding: 20pt;
+}
+#campoVet {
+  display: flex;
+  flex-direction: column;
 }
 #botao {
   align-content: bottom;

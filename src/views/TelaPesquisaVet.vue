@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-body"><card-boas-vindas titulo="Aqui você pode pesquisar um veterinário!" /></div>
+      <div class="card-body">
+        <card-boas-vindas titulo="Aqui você pode pesquisar um veterinário!" />
+      </div>
     </div>
 
     <div class="container">
@@ -37,21 +39,20 @@
           {{ veterinario.nome }}
         </div>
         <div class="col-2">
-          <label>Idade:</label>
-          {{ cachorro.cpf }}
+          <label>CPF:</label>
+          {{ veterinario.cpf }}
         </div>
         <div class="col-2">
-          <label>Peso:</label>
-          {{ cachorro.idade }}
+          <label>Idade:</label>
+          {{ veterinario.idade }}
         </div>
-       
-          <div class="col-4">
-            <a href="#" @click="editarVeterinario(veterinario.id)">Editar</a>
-          </div>
+
+        <div class="col-4">
+          <a href="#" @click="editarVeterinario(veterinario.id)">Editar</a>
         </div>
       </div>
     </div>
-  
+  </div>
 </template>
 
 <script>
@@ -70,6 +71,9 @@ export default {
     CardBoasVindas,
   },
   methods: {
+    editarVeterinario(id) {
+      this.$router.push(`/telacadastroVet/${id}`);
+    },
     pesquisar(nome) {
       fetch(`http://localhost:8080/veterinarios?nome=${nome}`, {
         method: "GET",
@@ -81,8 +85,8 @@ export default {
         .then((response) => {
           if (response.ok) return response.json();
         })
-        .then((cachorroJSON) => {
-          this.listaCachorros = cachorroJSON;
+        .then((veterinarioJSON) => {
+          this.listaVeterinarios = veterinarioJSON;
         });
     },
   },
