@@ -70,9 +70,26 @@ export default {
   components: {
     CardBoasVindas,
   },
+
+  mounted() {
+    fetch("http://localhost:8080/veterinarios", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .then((veterinarioJSON) => {
+        this.listaVeterinarios = veterinarioJSON;
+      });
+  },
+
   methods: {
     editarVeterinario(id) {
-      this.$router.push(`/telacadastroVet/${id}`);
+      this.$router.push(`/telaeditarVet/${id}`);
     },
     pesquisar(nome) {
       fetch(`http://localhost:8080/veterinarios?nome=${nome}`, {

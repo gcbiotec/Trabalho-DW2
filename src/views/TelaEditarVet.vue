@@ -2,17 +2,19 @@
   <div>
     <div class="card">
       <card-boas-vindas
-        titulo="Aqui você pode cadastrar um novo veterinário!"
+        titulo="Aqui você pode editar os dados do veterinário!"
       />
     </div>
 
-    <input
-      class="form-control"
-      type="text"
-      maxlength="100"
-      v-model="veterinario.nome"
-      placeholder="Qual é o nome do veterinário?"
-    />
+    <div class="row">
+      <input
+        class="form-control"
+        type="text"
+        maxlength="100"
+        v-model="veterinario.nome"
+        placeholder="Qual é o nome do veterinário?"
+      />
+    </div>
 
     <div class="row">
       <div class="col-6">
@@ -36,16 +38,11 @@
       </div>
     </div>
 
-    <div id="botao" class="container">
+    <div id="botao">
       <div class="row">
-        <div class="col-4">
-          <button type="button" class="btn btn-primary" @click="salvar()">
-            Salvar
-          </button>
-          <div>
-            <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
-          </div>
-        </div>
+        <button type="button" class="btn btn-primary" @click="salvar()">
+          Salvar
+        </button>
       </div>
     </div>
   </div>
@@ -67,20 +64,19 @@
 import CardBoasVindas from "@/components/CardBoasVindas.vue";
 
 export default {
-  data(){
-    return{
-      veterinario: {},
-      listaVeterinarios: [],
-      dataNasc: "",
-    };
-  },
-  name: "TelaCadastroVet",
+  name: "TelaEditarVet",
   components: {
     CardBoasVindas,
   },
-
+  data() {
+    return {
+      veterinario: {},
+    };
+  },
   mounted() {
-    fetch(`http://localhost:8080/veterinarios`, {
+    let idVeterinario = this.$route.params.id;
+
+    fetch(`http://localhost:8080/veterinarios/${idVeterinario}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -91,7 +87,7 @@ export default {
         if (response.ok) return response.json();
       })
       .then((veterinarioJSON) => {
-        this.listaVeterinarios = veterinarioJSON;
+        this.veterinario = veterinarioJSON;
       });
   },
   methods: {
@@ -108,12 +104,12 @@ export default {
       }
       return true;
     },
+
     salvar() {
       if (!this.dadosValidos()) {
-        this.mensagemErro = "Você deve preencher o dado faltante!";
         return;
       }
-      fetch("http://localhost:8080/veterinarios/", {
+      fetch("http://localhost:8080/veterinarios", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -122,7 +118,7 @@ export default {
         body: JSON.stringify(this.veterinario),
       }).then((response) => {
         if (response.ok) {
-          alert("O veterinário foi cadastrado!"), this.$router.push("/");
+          alert("Dados foram alterados com sucesso!"), this.$router.push("/");
         }
       });
     },

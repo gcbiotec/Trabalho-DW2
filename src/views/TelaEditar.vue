@@ -36,6 +36,7 @@
           />
         </form>
       </div>
+      
       <div class="col-4">
         <form>
           <label for="formControlIdade">Escolha a idade do pet:</label>
