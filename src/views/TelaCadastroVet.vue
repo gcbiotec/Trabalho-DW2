@@ -65,13 +65,15 @@
 
 <script>
 import CardBoasVindas from "@/components/CardBoasVindas.vue";
+import moment from "moment";
 
 export default {
-  data(){
-    return{
-      veterinario: {},
+  data() {
+    return {
+      veterinario: {
+        idade: moment('YYYY-MM-DD').diff(moment(this.dataNasc), "years"),
+      },
       listaVeterinarios: [],
-      dataNasc: "",
     };
   },
   name: "TelaCadastroVet",

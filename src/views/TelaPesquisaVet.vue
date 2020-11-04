@@ -28,27 +28,36 @@
       </div>
     </div>
 
-    <div
-      class="user"
-      :key="veterinario.id"
-      v-for="veterinario in listaVeterinarios"
-    >
-      <div class="row">
-        <div class="col-2">
-          <label>Nome:</label>
-          {{ veterinario.nome }}
-        </div>
-        <div class="col-2">
-          <label>CPF:</label>
-          {{ veterinario.cpf }}
-        </div>
-        <div class="col-2">
-          <label>Idade:</label>
-          {{ veterinario.idade }}
-        </div>
+    <div :key="veterinario.id" v-for="veterinario in listaVeterinarios">
+      <div class="card bg-light border-primary">
+        <div class="row">
+          <div class="col-2">
+            <label>Nome:</label>
+            {{ veterinario.nome }}
+          </div>
+          <div class="col-2">
+            <label>CPF:</label>
+            {{ veterinario.cpf }}
+          </div>
+          <div class="col-2">
+            <label>Idade:</label>
+            {{ veterinario.dataNasc }}
+          </div>
 
-        <div class="col-4">
-          <a href="#" @click="editarVeterinario(veterinario.id)">Editar</a>
+          <div class="col-2">
+            <a href="#" @click="editarVeterinario(veterinario.id)">Editar</a>
+          </div>
+
+          <div
+            class="col-2"
+            v-for="veterinario in listaVeterinarios"
+            :key="veterinario.id"
+          >
+            {{ cachorroDeCadaVet.cachorro }}
+          </div>
+          <button @click="carregarCachorrosVeterinario(veterinario.id)">
+            Ver Pacientes!
+          </button>
         </div>
       </div>
     </div>
@@ -64,6 +73,7 @@ export default {
     return {
       veterinario: {},
       listaVeterinarios: [],
+      cachorroDeCadaVet: [],
     };
   },
   name: "TelaPesquisaVet",
@@ -106,6 +116,29 @@ export default {
           this.listaVeterinarios = veterinarioJSON;
         });
     },
+    carregarCachorrosVeterinario(id) {
+      fetch(`http://localhost:8080/veterinarios/${id}/cachorros`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) return response.json();
+        })
+        .then((cachorroJSON) => {
+          this.listaCachorros = cachorroJSON;
+        });
+
+      this.cachorroDeCadaVet.push({ idVet: id, cachorro: this.cachorro });
+    },
   },
 };
 </script>
+
+<style>
+.card {
+  margin: 10px;
+}
+</style>
