@@ -28,9 +28,10 @@
       <div class="col-6">
         <span class="demonstration">Data de Nascimento</span>
         <el-date-picker
-          v-model="veterinario.dataNasc"
+          v-model="veterinario.dataNascimento"
           type="date"
           placeholder="Escolha a data"
+          value-format="yyyy-MM-dd"
         >
         </el-date-picker>
       </div>
@@ -38,14 +39,18 @@
 
     <div id="botao" class="container">
       <div class="row">
-        <div class="col-4">
+        
+          <div class="col-4"></div>
+          <div class="col-4">
           <button type="button" class="btn btn-primary" @click="salvar()">
             Salvar
           </button>
+          </div>
+          <div class="col-4"></div>
           <div>
             <span v-if="mensagemErro != ' '">{{ mensagemErro }}</span>
           </div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -65,15 +70,13 @@
 
 <script>
 import CardBoasVindas from "@/components/CardBoasVindas.vue";
-import moment from "moment";
 
 export default {
   data() {
     return {
-      veterinario: {
-        idade: moment('YYYY-MM-DD').diff(moment(this.dataNasc), "years"),
-      },
+      veterinario: {},
       listaVeterinarios: [],
+      mensagemErro: "",
     };
   },
   name: "TelaCadastroVet",
@@ -103,8 +106,8 @@ export default {
         this.veterinario.nome == "" ||
         this.veterinario.cpf == undefined ||
         this.veterinario.cpf == "" ||
-        this.veterinario.dataNasc == undefined ||
-        this.veterinario.dataNasc == ""
+        this.veterinario.dataNascimento == undefined ||
+        this.veterinario.dataNascimento == ""
       ) {
         return false;
       }
@@ -135,5 +138,9 @@ export default {
 <style>
 .container {
   padding: 10px;
+}
+#botao {
+  align-items: center;
+  padding-top: 40pt;
 }
 </style>

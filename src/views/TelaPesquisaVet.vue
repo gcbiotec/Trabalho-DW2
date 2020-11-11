@@ -39,25 +39,30 @@
             <label>CPF:</label>
             {{ veterinario.cpf }}
           </div>
-          <div class="col-2">
+          <div class="col-1">
             <label>Idade:</label>
-            {{ veterinario.dataNasc }}
+            {{ calcularIdade(veterinario.dataNascimento) }}
           </div>
 
-          <div class="col-2">
+          <div class="col-1">
             <a href="#" @click="editarVeterinario(veterinario.id)">Editar</a>
           </div>
-
-          <div
-            class="col-2"
-            v-for="veterinario in listaVeterinarios"
-            :key="veterinario.id"
-          >
-            {{ cachorroDeCadaVet.cachorro }}
-          </div>
+          <div class="col-1">
           <button @click="carregarCachorrosVeterinario(veterinario.id)">
             Ver Pacientes!
           </button>
+          </div>
+          <container >
+           <ul>
+            <li id="listaCachorros"
+                class="col-3"
+                v-for="cachorro in filtrarCachorroVeterinario(veterinario.id)"
+                :key="cachorro.id"
+              >
+                {{ cachorro.nome }}
+            </li>
+           </ul> 
+          </container>
         </div>
       </div>
     </div>
@@ -67,13 +72,14 @@
 <script>
 // @ is an alias to /src
 import CardBoasVindas from "@/components/CardBoasVindas.vue";
+import moment from "moment";
 
 export default {
   data() {
     return {
       veterinario: {},
       listaVeterinarios: [],
-      cachorroDeCadaVet: [],
+      cachorrosDoVeterinario: [],
     };
   },
   name: "TelaPesquisaVet",
@@ -98,6 +104,19 @@ export default {
   },
 
   methods: {
+    calcularIdade(dataNasc) {
+      return moment().diff(moment(dataNasc), "years");
+    },
+    filtrarCachorroVeterinario(id) {
+      let associacaoVetCachorro = this.cachorrosDoVeterinario.filter(
+        (associacao) => {
+          return associacao.id === id;
+        }
+      );
+      if (associacaoVetCachorro.length > 0)
+        return associacaoVetCachorro[0].cachorros;
+      else return [];
+    },
     editarVeterinario(id) {
       this.$router.push(`/telaeditarVet/${id}`);
     },
@@ -116,6 +135,7 @@ export default {
           this.listaVeterinarios = veterinarioJSON;
         });
     },
+
     carregarCachorrosVeterinario(id) {
       fetch(`http://localhost:8080/veterinarios/${id}/cachorros`, {
         method: "GET",
@@ -127,11 +147,13 @@ export default {
         .then((response) => {
           if (response.ok) return response.json();
         })
-        .then((cachorroJSON) => {
-          this.listaCachorros = cachorroJSON;
+        .then((cachorrosDoVeterinario) => {
+          let associacaoVetCachorro = {
+            id: id,
+            cachorros: cachorrosDoVeterinario,
+          };
+          this.cachorrosDoVeterinario.push(associacaoVetCachorro);
         });
-
-      this.cachorroDeCadaVet.push({ idVet: id, cachorro: this.cachorro });
     },
   },
 };
@@ -140,5 +162,9 @@ export default {
 <style>
 .card {
   margin: 10px;
+}
+#listaCachorros {
+  display: flex;
+  
 }
 </style>

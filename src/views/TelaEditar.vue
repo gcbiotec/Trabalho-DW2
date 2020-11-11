@@ -16,21 +16,21 @@
     </div>
 
     <div id="escolhaRaca" class="col-3">
-          <label>Escolha a raça do seu dog!</label>
+      <label>Escolha a raça do seu dog!</label>
 
-          <select input v-model="cachorro.raca" class="dropdown">
-            <option value="Beagle">Beagle</option>
-            <option value="Rottweiler">Rottweiler</option>
-            <option value="Poodle">Poodle</option>
-            <option value="Pastor Alemão">Pastor Alemão</option>
-            <option value="Bulldog">Bulldog</option>
-            <option value="Labrador">Labrador</option>
-            <option value="Husky">Husky</option>
-            <option value="Chihuahua">Chihuahua</option>
-            <option value="Dobermann">Dobermann</option>
-            <option value="Bull Terrier">Bull Terrier</option>
-          </select>
-        </div>
+      <select input v-model="cachorro.raca" class="dropdown">
+        <option value="Beagle">Beagle</option>
+        <option value="Rottweiler">Rottweiler</option>
+        <option value="Poodle">Poodle</option>
+        <option value="Pastor Alemão">Pastor Alemão</option>
+        <option value="Bulldog">Bulldog</option>
+        <option value="Labrador">Labrador</option>
+        <option value="Husky">Husky</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="Dobermann">Dobermann</option>
+        <option value="Bull Terrier">Bull Terrier</option>
+      </select>
+    </div>
 
     <div class="row">
       <div class="col-4">
@@ -64,7 +64,7 @@
 
     <div id="campoVet" class="col-3">
       <label>Escolha o veterinário responsável:</label>
-      <select v-model="cachorro.veterinarioResponsavel">
+      <select v-model="cachorro.veterinario_id">
         <option
           :key="veterinarioResponsavel.id"
           v-for="veterinarioResponsavel in listaVeterinarios"
@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       cachorro: {},
+      listaVeterinarios: [],
     };
   },
   mounted() {
@@ -106,7 +107,6 @@ export default {
       .then((cachorroJSON) => {
         this.cachorro = cachorroJSON;
       }),
-
       fetch(`http://localhost:8080/veterinarios`, {
         method: "GET",
         headers: {
@@ -132,7 +132,22 @@ export default {
         body: JSON.stringify(this.cachorro),
       }).then((response) => {
         if (response.ok) {
-          alert("Dados foram alterados com sucesso!"), this.$router.push("/");
+
+        let idCachorro = this.$route.params.id;
+        let identificacaoDoVeterinario = this.cachorro.veterinario_id
+
+          fetch(`http://localhost:8080/cachorros/` + idCachorro, {
+            method: "PATCH",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({veterinarioId:identificacaoDoVeterinario}),
+          }).then((response) => {
+            if (response.ok) {
+              alert("Seu dog foi editado com sucesso!"), this.$router.push("/");
+            }
+          });
         }
       });
     },
