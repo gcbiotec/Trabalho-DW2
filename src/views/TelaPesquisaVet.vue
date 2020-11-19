@@ -52,18 +52,18 @@
             Ver Pacientes!
           </button>
           </div>
-          <container >
+
+          <div class="col-3" >
            <ul>
             <li id="listaCachorros"
-                class="col-3"
                 v-for="cachorro in filtrarCachorroVeterinario(veterinario.id)"
                 :key="cachorro.id"
               >
                 {{ cachorro.nome }}
             </li>
            </ul> 
-          </container>
-        </div>
+         </div>
+
       </div>
     </div>
   </div>
@@ -165,6 +165,5 @@ export default {
 }
 #listaCachorros {
   display: flex;
-  
 }
 </style>
